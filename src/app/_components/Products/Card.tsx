@@ -14,8 +14,8 @@ import {
   ProductStatus,
   ProductStatusEnum,
 } from "@/server/utils";
+import { Badge } from "@/components/ui/badge";
 import {
-  Badge,
   Calendar,
   Eye,
   Heart,

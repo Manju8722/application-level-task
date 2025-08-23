@@ -4,16 +4,16 @@ import { DbConnection } from "@/server/db";
 import { collectionNames } from "@/server/utils";
 import { validateProduct } from "@/server/utils/validation";
 
-interface RouteParams {
-  params: { id: string };
-}
 // GET /api/products/[id]
-export async function GET(request: NextRequest, { params }: RouteParams) {
+export async function GET(
+  request: NextRequest,
+  context: { params: Promise<{ id: string }> }
+) {
   try {
     const db = await DbConnection();
     const collection = db.collection(collectionNames.PRODUCTS);
 
-    const { id } = params;
+    const { id } = await context.params;
 
     // ✅ validate ObjectId
     if (!ObjectId.isValid(id)) {
@@ -42,7 +42,7 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
 // PUT /api/products/[id]
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
     const body = await req.json();
@@ -56,7 +56,7 @@ export async function PUT(
     const collection = db.collection(collectionNames.PRODUCTS);
 
     // Check if product exists
-    const productId = new ObjectId(params.id);
+    const productId = new ObjectId((await context.params).id);
     // ✅ validate ObjectId
     if (!ObjectId.isValid(productId)) {
       return NextResponse.json(
@@ -108,13 +108,13 @@ export async function PUT(
 // DElETE /api/products/[id]
 export async function DELETE(
   _req: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
     const db = await DbConnection();
     const collection = db.collection(collectionNames.PRODUCTS);
 
-    const productId = new ObjectId(params.id);
+    const productId = new ObjectId((await context.params).id);
 
     // ✅ validate ObjectId
     if (!ObjectId.isValid(productId)) {

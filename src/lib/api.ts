@@ -30,7 +30,8 @@ export const getAllProducts = async (params: any): Promise<Productlist> => {
     Object.entries(params as Record<string, string | null | undefined>).filter(
       ([_, v]) => v !== null && v !== undefined && v !== ""
     )
-  );
+  ) as Record<string, string>;
+
   const query = new URLSearchParams(cleanParams).toString();
   const url = query ? `/api/products?${query}` : "/api/products";
   return await (await fetch(url)).json();

@@ -60,7 +60,10 @@ export function ProductPagination() {
 
   return (
     <div className="!w-auto mx-auto flex justify-end items-center gap-x-2">
-      <PaginationLimit value={limit || limitQuery} onChange={setlimit} />
+      <PaginationLimit
+        value={String(limit || limitQuery)}
+        onChange={(val: string) => setlimit(Number(val))}
+      />
 
       <Pagination>
         <PaginationContent>
