@@ -4,11 +4,11 @@ import { DbConnection } from "@/server/db";
 import { collectionNames } from "@/server/utils";
 import { validateProduct } from "@/server/utils/validation";
 
+interface RouteParams {
+  params: { id: string };
+}
 // GET /api/products/[id]
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function GET(request: NextRequest, { params }: RouteParams) {
   try {
     const db = await DbConnection();
     const collection = db.collection(collectionNames.PRODUCTS);
