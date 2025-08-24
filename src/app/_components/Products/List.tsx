@@ -51,7 +51,7 @@ const List = () => {
               <h2 className="text-2xl">No product Found</h2>
               <p>
                 We couldn't find any products matching your current filters. Try
-                adjusting your search criteria or browse our other categories.
+                adjusting your search criteria
               </p>
             </div>
           )}

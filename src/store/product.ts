@@ -4,6 +4,7 @@ import { create } from "zustand";
 
 type Filters = {
   sortByField: string;
+  sortOrderBy: "asc" | "desc";
   search: string | null;
   category: ProductCategory | null;
   status: ProductStatus | null;
@@ -15,9 +16,11 @@ type Filters = {
   setSerach: (search: string) => void;
   setlimit: (limit: number) => void;
   setsortByField: (sortByField: string) => void;
+  setsortOrderBy: (search: "asc" | "desc") => void;
 };
 
 export const useProductFilters = create<Filters>((set) => ({
+  sortOrderBy: "desc",
   sortByField: ProductEnum.CREATED_AT,
   search: null,
   category: null,
@@ -30,4 +33,5 @@ export const useProductFilters = create<Filters>((set) => ({
   setlimit: (limit: number) => set({ limit, page: 1 }),
   setSerach: (search: string) => set({ search, page: 1 }),
   setsortByField: (sortByField: string) => set({ sortByField, page: 1 }),
+  setsortOrderBy: (sortOrderBy: "asc" | "desc") => set({ sortOrderBy }),
 }));

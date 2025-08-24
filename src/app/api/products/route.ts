@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
     // Sorting
     const sortBy = searchParams.get("sortByField") || "createdAt";
     const sortOrder =
-      searchParams.get("sortOrder")?.toLowerCase() === "asc" ? 1 : -1;
+      searchParams.get("sortOrderBy")?.toLowerCase() === "asc" ? 1 : -1;
 
     // Filters
     const category = searchParams.get(ProductEnum.CATEGORY);

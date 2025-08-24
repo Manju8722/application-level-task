@@ -25,16 +25,24 @@ export const useStatus = () => {
 };
 
 export const useProducts = () => {
-  const { category, status, page, limit, search, sortByField } =
+  const { category, status, page, limit, search, sortByField, sortOrderBy } =
     useProductFilters();
 
   return useQuery({
     queryKey: [
       "products",
-      { category, status, page, limit, search, sortByField },
+      { category, status, page, limit, search, sortByField, sortOrderBy },
     ],
     queryFn: () =>
-      getAllProducts({ category, status, page, limit, search, sortByField }),
+      getAllProducts({
+        category,
+        status,
+        page,
+        limit,
+        search,
+        sortByField,
+        sortOrderBy,
+      }),
     // keepPreviousData: true,
     staleTime: 0,
     retry: 2,
