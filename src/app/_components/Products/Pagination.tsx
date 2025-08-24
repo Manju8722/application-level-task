@@ -65,7 +65,7 @@ export function ProductPagination() {
         onChange={(val: string) => setlimit(Number(val))}
       />
 
-      <Pagination>
+      <Pagination className="mx-0 !w-min">
         <PaginationContent>
           {/* Prev Button */}
           <PaginationItem>
